@@ -14,12 +14,20 @@ def on_common(word, word_eol, userdata):
 	else :
 		target = word[1]
 		common_channels = list();
+		#Get list of channels we are in
 		for chan in hexchat.get_list('channels'):
+		
+			#Get context of channel 
 			context = hexchat.find_context(None, chan.channel)
+			
+			#Check each user in that channel and see if it matches the target
 			for user in context.get_list('users'):
 				if(user.nick == target):
+				
+					#If nicks match, ad the channel to the list
 					common_channels.append(chan.channel)
 			
+		#Print out the list of common channels
 		hexchat.prnt("Channels in common with " + target + ":")
 		for chan in common_channels:
 			hexchat.prnt(chan + " ")
