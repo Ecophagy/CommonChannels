@@ -17,12 +17,9 @@ def on_common(word, word_eol, userdata):
 		#Get list of channels we are in
 		for chan in hexchat.get_list('channels'):
 		
-			#Get context of channel 
-			context = hexchat.find_context(None, chan.channel)
-			
 			#Check each user in that channel and see if it matches the target
-			for user in context.get_list('users'):
-				if(user.nick == target):
+			for user in chan.context.get_list('users'):
+				if(hexchat.nickcmp(user.nick, target) == 0):
 				
 					#If nicks match, ad the channel to the list
 					common_channels.append(chan.channel)
